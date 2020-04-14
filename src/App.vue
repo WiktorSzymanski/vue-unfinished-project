@@ -1,32 +1,54 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <header class="navbar navbar-light bg-dark">
+      <router-link class="navbar-brand" to="/"><img src="./assets/logo.svg"></router-link>
+    </header>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Some photos maybe?</h1>
+        <hr>
+        <p class="lead">yes please br0</p>
+      </div>
     </div>
-    <router-view/>
+    <div class="navbar-nav navbar-light bg-light">
+      <div class="container">
+        <ul class="nav nav-pills nav-fill">
+          <li class="nav-item">
+            <router-link to="/">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/about">About</router-link>
+          </li>
+          <li class="nav-item">Bla bla</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-3 side-panel">
+          <p>side panel</p>
+        </div>
+        <div class="col-9 content">
+          <router-view/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<style scoped>
+.jumbotron {
+  margin-bottom: 0;
 }
-
-#nav {
-  padding: 30px;
+.navbar-nav {
+  margin-bottom: 30px;
 }
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+.content {
+  border: solid 1px #aaa;
+  background-color: #eee;
 }
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.side-panel {
+  border: solid 1px #aaa;
+  background-color: #ddd;
 }
 </style>
