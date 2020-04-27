@@ -1,17 +1,13 @@
 <template>
   <div id="app">
     <header class="navbar navbar-light bg-dark">
-      <router-link class="navbar-brand" to="/"><img src="./assets/logo.svg"></router-link>
+      <router-link class="navbar-brand" to="/">
+        <img src="./assets/logo.svg">
+      </router-link>
     </header>
-    <div class="jumbotron jumbotron-fluid">
-      <div class="container">
-        <h1 class="display-4">Some photos maybe?</h1>
-        <hr>
-        <p class="lead">yes please br0</p>
-      </div>
-    </div>
+    <SimpleJumbotron/>
     <div class="navbar-nav navbar-light bg-light">
-      <div class="container">
+      <div class="container navbar-main">
         <ul class="nav nav-pills nav-fill">
           <li class="nav-item">
             <router-link to="/">Home</router-link>
@@ -36,9 +32,25 @@
   </div>
 </template>
 
+<script>
+import SimpleJumbotron from '@/components/SimpleJumbotron.vue';
+
+export default {
+  components: {
+    SimpleJumbotron,
+  },
+};
+</script>
+
 <style scoped>
-.jumbotron {
-  margin-bottom: 0;
+.navbar-brand {
+  padding: 10px;
+}
+.navbar-brand img {
+  height: 20px;
+}
+.navbar-main {
+  padding: 5px;
 }
 .navbar-nav {
   margin-bottom: 30px;
