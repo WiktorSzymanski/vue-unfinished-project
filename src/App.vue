@@ -42,6 +42,12 @@ export default {
 };
 </script>
 
+<style>
+.router-link-active {
+  outline: none;
+}
+</style>
+
 <style scoped>
 .navbar-brand {
   padding: 10px;
@@ -54,6 +60,9 @@ export default {
 }
 .navbar-nav {
   margin-bottom: 30px;
+}
+.nav-item:hover {
+  color: red;
 }
 .content {
   border: solid 1px #aaa;
