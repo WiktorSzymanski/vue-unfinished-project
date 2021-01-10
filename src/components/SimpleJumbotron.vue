@@ -36,7 +36,7 @@ export default {
 <style scoped>
 .jumbotron {
   margin-bottom: 0;
-  min-height: 200px;
+  min-height: 50vh;
 }
 .jumbotron-img {
   background-repeat: no-repeat;

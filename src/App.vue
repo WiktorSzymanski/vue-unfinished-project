@@ -4,6 +4,7 @@
       <router-link class="navbar-brand" to="/">
         <img src="./assets/logo.svg">
       </router-link>
+        <img class="menu-button" src="./assets/logo-short.svg">
     </header>
     <SimpleJumbotron/>
     <div class="navbar-nav navbar-light bg-light">
@@ -13,22 +14,30 @@
             <router-link to="/">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/about">About</router-link>
+            <router-link to="/about">O Nas</router-link>
           </li>
-          <li class="nav-item">Bla bla</li>
+          <li class="nav-item">
+            <router-link to="/offer">Oferta</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/gallery">Galleria</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/contact">Kontakt</router-link>
+          </li>
         </ul>
       </div>
     </div>
     <div class="container">
       <div class="row">
-        <div class="col-3 side-panel">
-          <p>side panel</p>
-        </div>
-        <div class="col-9 content">
+        <div class="col-12 content">
           <router-view/>
         </div>
       </div>
     </div>
+    <footer class="bg-dark">
+      Coś tam
+    </footer>
   </div>
 </template>
 
@@ -64,12 +73,26 @@ export default {
 .nav-item:hover {
   color: red;
 }
-.content {
-  border: solid 1px #aaa;
-  background-color: #eee;
+
+li {
+  font-family: Poppins;
 }
-.side-panel {
-  border: solid 1px #aaa;
-  background-color: #ddd;
+
+footer {
+  font-family: Roboto;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+header {
+  height: 80px;
+}
+
+.menu-button {
+  height: 50%;
+  cursor: pointer;
 }
 </style>
