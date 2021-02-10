@@ -2,8 +2,8 @@
   <div>
     <div
       class="jumbotron jumbotron-fluid d-none d-lg-block jumbotron-img"
-      :style="{ backgroundImage: `url('${imgUrl}'` }" >
-    </div>
+      :style="{ backgroundImage: `url('${imgUrl}'` }"
+    />
   </div>
 </template>
 

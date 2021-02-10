@@ -1,15 +1,18 @@
 <template>
   <div class="about">
     <div id="panel">
-      <img alt="Vue logo" src="../assets/logo.png">
+      <img
+        alt="Vue logo"
+        src="../assets/logo.png"
+      >
       <div id="panel-concent">
         <h1>O Nas</h1>
         <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Mauris aliquet consequat finibus.
-        Donec augue nunc, vehicula non diam eget, tempor interdum magna.
-        Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
-        Sed ullamcorper nibh a scelerisque dictum.
-        Vivamus posuere pharetra arcu vitae mattis.</span>
+          Donec augue nunc, vehicula non diam eget, tempor interdum magna.
+          Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
+          Sed ullamcorper nibh a scelerisque dictum.
+          Vivamus posuere pharetra arcu vitae mattis.</span>
       </div>
     </div>
 
@@ -49,7 +52,7 @@
   #panel-concent {
     display: flex;
     flex-direction: column;
-    width: 600px;
+    max-width: 600px;
     flex-wrap: wrap;
   }
 

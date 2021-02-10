@@ -1,52 +1,78 @@
 <template>
   <div id="app">
-    <header class="navbar navbar-light bg-dark">
-      <router-link class="navbar-brand" to="/">
-        <img src="./assets/logo.svg">
-      </router-link>
-        <img class="menu-button" src="./assets/logo-short.svg">
-    </header>
-    <SimpleJumbotron/>
-    <div class="navbar-nav navbar-light bg-light">
-      <div class="container navbar-main">
-        <ul class="nav nav-pills nav-fill">
-          <li class="nav-item">
-            <router-link to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/about">O Nas</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/offer">Oferta</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/gallery">Galleria</router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/contact">Kontakt</router-link>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-12 content">
-          <router-view/>
+    <div class="content">
+      <header class="navbar navbar-light bg-dark">
+        <router-link
+          v-if="!mobileView"
+          class="navbar-brand"
+          to="/"
+        >
+          <img src="./assets/logo.svg">
+        </router-link>
+        <div />
+        <img
+          v-if="mobileView"
+          class="menu-button"
+          src="./assets/logo-short.svg"
+          @click="openNav()"
+        >
+      </header>
+      <SimpleJumbotron />
+      <Navigation v-if="!mobileView" />
+      <div class="container">
+        <div class="row">
+          <router-view />
         </div>
       </div>
+      <Footer />
     </div>
-    <footer class="bg-dark">
-      Coś tam
-    </footer>
+    <NavigationMobile v-if="showNav" />
   </div>
 </template>
 
 <script>
 import SimpleJumbotron from '@/components/SimpleJumbotron.vue';
+import Navigation from '@/components/Navigation.vue';
+import NavigationMobile from '@/components/NavigationMobile.vue';
+import Footer from '@/components/Footer.vue';
 
 export default {
   components: {
     SimpleJumbotron,
+    Navigation,
+    NavigationMobile,
+    Footer,
+  },
+  data() {
+    return {
+      mobileView: false,
+      showNav: false,
+    };
+  },
+  watch: {
+    mobileView() {
+      if (!this.mobileView) {
+        this.showNav = false;
+      }
+    },
+  },
+  mounted() {
+    this.handleView();
+    window.addEventListener('resize', this.handleView);
+  },
+  methods: {
+    handleView() {
+      this.mobileView = window.innerWidth <= 990;
+      document.querySelector('body').classList.remove('no-scroll');
+    },
+    openNav() {
+      if (this.showNav) {
+        document.querySelector('body').classList.remove('no-scroll');
+      } else {
+        document.querySelector('body').classList.add('no-scroll');
+      }
+      this.showNav = !this.showNav;
+    },
   },
 };
 </script>
@@ -55,44 +81,39 @@ export default {
 .router-link-active {
   outline: none;
 }
+
+.navbar {
+  position: fixed;
+  width: 100%;
+  display: flex;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
+
 </style>
 
-<style scoped>
-.navbar-brand {
-  padding: 10px;
-}
-.navbar-brand img {
-  height: 20px;
-}
-.navbar-main {
-  padding: 5px;
-}
-.navbar-nav {
-  margin-bottom: 30px;
-}
-.nav-item:hover {
-  color: red;
+<style scoped lang="scss">
+.menu-button {
+  cursor: pointer;
 }
 
-li {
-  font-family: Poppins;
-}
-
-footer {
-  font-family: Roboto;
-  height: 100px;
+#app {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
 }
 
 header {
   height: 80px;
+  display: flex;
+  justify-content: space-between;
+
+  img {
+    height: 70%;
+  }
 }
 
-.menu-button {
-  height: 50%;
-  cursor: pointer;
+.content {
+  width: 100%;
 }
 </style>
