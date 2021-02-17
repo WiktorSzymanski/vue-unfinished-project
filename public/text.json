@@ -1,0 +1,18 @@
+{
+    "products": [
+        {
+            "name": "coś",
+            "img": "/logo-short.svg",
+            "short": "opis",
+            "long": "long opis",
+            "price": 5
+        },
+        {
+            "name": "inne coś",
+            "img": "/logo-short-x.svg",
+            "short": "inny opis",
+            "long": "inny long opis",
+            "price": 2
+        }
+    ]
+}
