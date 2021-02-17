@@ -54,4 +54,15 @@ li {
   color: white;
   font-size: 30px;
 }
+
+.nav-item:hover {
+  color: rgb(255, 81, 81);
+}
+
+.router-link-exact-active {
+  font-weight: 800;
+  font-size: 110%;
+  color: rgb(255, 81, 81);
+}
+
 </style>

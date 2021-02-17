@@ -1,7 +1,7 @@
 <template>
   <div>
     <div
-      class="jumbotron jumbotron-fluid d-none d-lg-block jumbotron-img"
+      class="jumbotron jumbotron-fluid jumbotron-img"
       :style="{ backgroundImage: `url('${imgUrl}'` }"
     />
   </div>

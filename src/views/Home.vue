@@ -3,7 +3,7 @@
     <div class="greetings panel">
       <h1>Coś Tam</h1>
       <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris aliquet consequat finibus.
+        Mauris aliquet consequat finibus.
         Donec augue nunc, vehicula non diam eget, tempor interdum magna.
         Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
         Sed ullamcorper nibh a scelerisque dictum.
@@ -11,13 +11,17 @@
     </div>
 
     <div class="mid panel">
+      <img
+        alt="Vue logo"
+        :class="{'mobile-img' : mobileView}"
+        src="../assets/logo.png"
+      >
       <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris aliquet consequat finibus.
+        Mauris aliquet consequat finibus.
         Donec augue nunc, vehicula non diam eget, tempor interdum magna.
         Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
         Sed ullamcorper nibh a scelerisque dictum.
         Vivamus posuere pharetra arcu vitae mattis.</span>
-      <img alt="Vue logo" src="../assets/logo.png">
     </div>
 
     <!-- <div class="gallery panel">
@@ -35,13 +39,25 @@
 </template>
 
 <script>
+import { bus } from '../main';
 
 export default {
   name: 'Home',
+  data () {
+    return {
+      mobileView: false
+    }
+  },
+  created () {
+    bus.$on('mobileView', (data) => {
+      this.mobileView = data
+    })
+  },
 };
+
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   div {
     display: flex;
   }
@@ -49,32 +65,46 @@ export default {
   .home {
     flex-direction: column;
     justify-content: space-around;
-    min-height: 100vh;
-    padding: 100px 10px 100px 10px;
+    padding-top: 100px;
+    padding-bottom: 100px;
   }
 
   .panel {
-    margin-top: 100px;
-    margin-bottom: 100px;
+    padding: 100px 40px 100px 40px;
   }
 
   .greetings {
     flex-direction: column;
-    text-align: center;
-  }
+    text-align: justify;
 
-  .mid span {
-    max-width: 600px;
+    h1 {
+      text-align: center;
+      padding-bottom: 20px;
+    }
   }
 
   .mid{
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
+    text-align: justify;
+
+    span {
+      max-width: 60%;
+    }
+
+    img {
+      width: 30%;
+    }
   }
 
   .gallery {
     flex-direction: column;
+
+    span {
+      margin-top: 50px;
+      text-align: center;
+    }
   }
 
   .slide-show {
@@ -83,9 +113,44 @@ export default {
     align-items: center;
     justify-content: center;
   }
+  
 
-  .gallery span {
-    margin-top: 50px;
-    text-align: center;
+  @media (max-width: 800px) {
+    .panel {
+      padding: 50px 40px 50px 40px;
+    }
+
+    .mid {
+      span {
+        max-width: 40%;
+      }
+      img {
+        width: 50%;
+      }
+    }
+  }
+
+  @media (max-width: 580px) {
+    .panel {
+      padding: 40px 20px 40px 20px;
+    }
+
+    .greetings {
+      span {
+        width: 100%;
+      }
+    }
+
+    .mid {
+      span {
+        max-width: 100%;
+      }
+      img {
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 50px;
+      }
+    }
   }
 </style>

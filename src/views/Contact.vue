@@ -1,17 +1,24 @@
 <template>
   <div class="contact">
-    <div class="panel">
-      <h1>Kontakt</h1>
+    <h1>Kontakt</h1>
 
-      <div class="bus-card">
-        <img alt="Vue logo" src="../assets/logo.png">
-        <div class="info">
-          <span>Sebastian Szymański</span>
-          <span>tel.: 513 091 914</span>
-          <span>e-mail: akcenty@wp.pl</span>
-          <span>Pracownia Projektowa</span>
-          <span>os. Stefana Batorego 36</span>
-          <span>60-687 Poznań</span>
+    <div class="bus-card">
+      <img
+        alt="akcenty logo"
+        src="../assets/logo.svg"
+      >
+      <div class="line" />
+
+      <div class="info">
+        <div class="up">
+          <b>Sebastian Szymański</b><br>
+          tel.kom. 513 091 914
+        </div>
+        <div class="bottom">
+          Pracownia Projektowa<br>
+          os. Stefana Batorego 36<br>
+          60-687 Poznań<br>
+          e-mail: akcenty@wp.pl
         </div>
       </div>
     </div>
@@ -26,27 +33,61 @@
         <span>Temat</span>
         <input type="text">
         <span>Wiadomość</span>
-        <textarea></textarea>
+        <textarea />
       </div>
-      <img alt="Vue logo" src="../assets/logo.png">
+      <img
+        alt="Vue logo"
+        src="../assets/logo.png"
+      >
     </div>
   </div>
 </template>
-<style scoped>
+<style scoped lang="scss">
   div {
     display: flex;
   }
 
   .bus-card {
     width: 100%;
-    height: 400px;
+    height: 40%;
     background-color: lightgray;
     flex-direction: row;
-    align-items: center;
     justify-content: space-around;
+    padding: 50px 20px 20px 20px;
+    margin: 100px 0 100px 0;
+
+    img {
+      width: 250px;
+      height: 20%;
+      padding-top: 20px;
+    }
+
+    .line {
+      background-color: orange;
+      width: 5px;
+      height: 110px;
+    }
+
+    .info {
+      min-height: 300px;
+      text-align: justify;
+      flex-direction: column;
+      display: flex;
+      padding: 20px 0 20px 0;
+
+      .up {
+        display: block;
+      }
+
+      .bottom {
+        margin-top: auto;
+        padding-bottom: 10px;
+      }
+    }
   }
 
   .row {
+    width: 100%;
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
@@ -55,8 +96,9 @@
   .contact {
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     min-height: 100vh;
-    padding: 100px 10px 100px 10px;
+    padding: 200px 10px 100px 10px;
   }
 
   .panel {
@@ -76,10 +118,6 @@
     max-width: 600px;
   }
 
-  img {
-    margin-top:5%
-  }
-
   #panel-content h1 {
     align-self: flex-start;
   }
@@ -94,5 +132,49 @@
 
   span {
     font-family: 'Roboto', sans-serif;
+  }
+
+  @media (max-width: 500px) {
+    .bus-card {
+      width: 90vw;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 60px;
+
+      img {
+        width: 80%;
+      }
+
+      .info {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0;
+
+        .bottom {
+          margin-top: 0;
+        }
+      }
+
+      .line {
+        height: 5px;
+        width: 90%;
+        margin: 30px 0 30px 0;
+      }
+    }
+
+    .contact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 150px 20px 100px 20px;
+    }
+
+    .row {
+      img {
+        padding-top: 100px;
+      }
+    }
   }
 </style>
