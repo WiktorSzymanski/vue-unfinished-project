@@ -1,98 +1,138 @@
 <template>
-  <div class="gallery">
-    <h1>Gallery</h1>
-    <div class="panel">
-      <div class="images">
-          <a href="..\assets\gallery\1.jpg" class="img-1">
-          </a>
-          <a href="..\assets\gallery\2.jpg" class="img-2">
-          </a>
-          <a href="..\assets\gallery\3.jpg" class="img-3">
-          </a>
-          <a href="..\assets\gallery\4.jpg" class="img-4">
-          </a>
-          <a href="..\assets\gallery\5.jpg" class="img-5">
-          </a>
-          <a href="..\assets\gallery\6.jpg" class="img-6">
-          </a>
-          <a href="..\assets\gallery\7.jpg" class="img-7">
-          </a>
-          <a href="..\assets\gallery\8.jpg" class="img-8">
-          </a>
+  <div class="offer">
+    <div
+      v-if="imageShown"
+      class="big_image"
+    > 
+      <div class="im_area">
+        <img
+          :src="imageShownData.img"
+          :alt="imageShownData.name"
+        >
+        <img
+          src="/logo-short-x.svg"
+          class="close"
+          style="color:white;"
+          @click="closeImage()"
+        >
       </div>
+    </div>
+    <h1>Galeria</h1>
+    <div class="images">
+      <img
+        v-for="(item, index) of images"
+        :key="index"
+        class="imag"
+        :src="item.img"
+        :alt="item.name"
+        @click="showImage(item)"
+      >
     </div>
   </div>
 </template>
 
-<style scoped>
+<script>
+  export default {
+    data () {
+      return {
+        images: [],
+        imageShown: false,
+        imageShownData: []
+      }
+    },
+    mounted() {
+      let req = new XMLHttpRequest();
 
-  .panel {
-    margin-top: 100px;
-    margin-bottom: 100px;
+      req.open('GET', '/text.json', false);
+      req.send(null);
+
+      if (req.status == 200) {
+        this.images = JSON.parse(req.responseText).images
+      }
+    },
+    methods: {
+      showImage(item) {
+        this.imageShownData = item;
+        this.imageShown = true;
+        document.querySelector('body').classList.add('no-scroll');
+      },
+      closeImage() {
+        this.imageShown = false;
+        document.querySelector('body').classList.remove('no-scroll');
+      }
+    }
   }
+</script>
 
-
-  h1 {
-    margin-bottom: 100px;
-    margin-left: 42%;
+<style scoped lang="scss">
+  .offer {
+    min-height: 1200px;
+    padding: 150px 20px 200px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-
-  .gallery {
-    min-height: 100vh;
-    padding: 100px 10px 100px 10px;
-  }
-
 
   .images {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: auto;
-    grid-gap: 20px;
-    grid-template-areas:
-                    'img-1 img-2 img-3 img-3'
-                    'img-1 img-4 img-5 img-6'
-                    'img-7 img-7 img-8 img-6';
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .imag {
+      width: 32%;
+      margin-bottom: 2%;
+      object-fit: cover;
+      cursor: pointer;
+    }
   }
 
-  .img-1{
-    grid-area: img-1;
-    background-image: url('../assets/gallery/1.jpg');
-    min-height: 820px;
+  .big_image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    padding: 50px;
+    background: rgba(52, 58, 64, 0.98);
+    bottom: 0;
+
+    .im_area {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img {
+      width: 50vw;
+    }
+
+    .close {
+      cursor: pointer;
+      align-self: flex-start;
+      width: 30px;
+      position: relative;
+      top: 2px;
+      margin: 0 0 0 -28px;
+    }
   }
 
-  .img-2{
-    grid-area: img-2;
-    background-image: url("../assets/gallery/2.jpg");
-  }
-.img-3{
-    grid-area: img-3;
-    background-image: url("../assets/gallery/3.jpg");
-  }
-
-  .img-4{
-    grid-area: img-4;
-    background-image: url("../assets/gallery/4.jpg");
+  @media (max-width: 600px) {
+    .images {
+      .imag {
+        width: 49%;
+        margin-bottom: 2%;
+      }
+    }
   }
 
-  .img-5{
-    grid-area: img-5;
-    background-image: url("../assets/gallery/5.jpg");
+  @media (max-width: 1000px) {
+    .big_image {
+      img {
+        width: 90vw;
+      }
+    }
   }
-
-  .img-6{
-    grid-area: img-6;
-    background-image: url("../assets/gallery/6.jpg");
-    min-height: 820px;
-  }
-
-  .img-7{
-    grid-area: img-7;
-    background-image: url("../assets/gallery/7.jpg");
-  }
-
-  .img-8{
-    grid-area: img-8;
-    background-image: url("../assets/gallery/8.jpg");
-  }
-
-  </style>
+</style>

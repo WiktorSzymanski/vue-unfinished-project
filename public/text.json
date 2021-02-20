@@ -14,5 +14,71 @@
             "long": "inny long opis",
             "price": 2
         }
+    ],
+    "images": [
+        {
+            "name": "coś",
+            "img": "/gallery/1.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/2.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/3.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/4.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/1.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/2.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/3.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/4.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/1.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/2.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/3.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/4.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/1.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/2.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/3.jpg"
+        },
+        {
+            "name": "coś",
+            "img": "/gallery/4.jpg"
+        }
     ]
 }

@@ -25,7 +25,10 @@
       </div>
       <Footer />
     </div>
-    <NavigationMobile v-if="showNav" />
+    <NavigationMobile
+      v-if="showNav"
+      @clicked="openNav()"
+    />
   </div>
 </template>
 
@@ -61,6 +64,9 @@ export default {
     },
     $route() {
       this.checkUrl()
+      setTimeout(() => {
+        window.scrollTo(0,0)
+      },20)
     }
   },
   mounted() {
