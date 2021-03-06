@@ -7,12 +7,10 @@
       >
       <div class="panel-concent">
         <h1>O Nas</h1>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris aliquet consequat finibus.
-          Donec augue nunc, vehicula non diam eget, tempor interdum magna.
-          Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
-          Sed ullamcorper nibh a scelerisque dictum.
-          Vivamus posuere pharetra arcu vitae mattis.</span>
+        <span>Działamy na rynku od 1996 roku i cieszymy się zasłużoną renomą wysokiej jakości usług z zakresu: wystawiennictwa, architektury wnętrz,
+          informacji wizualnej, architektury zieleni. Nie obawiamy się nowych wyzwań i technologii, doskonale orientujemy się w aktualnych trendach
+          czerpiąc z nich to, co najlepsze i mamy ciągle nowe pomysły. Nie podejmujemy decyzji bez zastanowienia oraz szanujemy doświadczenia i zdanie
+          innych.</span>
       </div>
     </div>
 
@@ -38,7 +36,7 @@
   .about {
     flex-direction: column;
     justify-content: space-around;
-    min-height: 91vh;
+    min-height: 100vh;
   }
 
   .panel {

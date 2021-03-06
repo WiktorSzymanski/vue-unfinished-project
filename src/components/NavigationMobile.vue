@@ -56,13 +56,20 @@ export default {
 </script>
 
 <style scoped>
+*{
+  font-size: 30px;
+  z-index: 2;
+}
+
 .navigation-mobile {
   position: fixed;
   right: 0;
-  top: 70px;
+  top: 50px;
   width: 100%;
   height: 100%;
   background: rgba(52, 58, 64, 0.98);
+  transform: translateX(100vw);
+  transition: all .5s ease-in-out;
 }
 
 ul {
@@ -77,7 +84,7 @@ li {
   font-family: Poppins;
   list-style: none;
   color: white;
-  font-size: 30px;
+  margin-top: 20px;
 }
 
 .nav-item:hover {
@@ -90,4 +97,7 @@ li {
   color: rgb(255, 81, 81);
 }
 
+.navigation-mobile.open {
+  transform: translateX(0px)
+}
 </style>

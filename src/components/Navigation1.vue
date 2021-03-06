@@ -40,9 +40,10 @@ li:hover {
 }
 
 .router-link-exact-active {
-  font-weight: 800;
-  font-size: 110%;
+  font-weight: 700;
+  font-size: 105%;
   color: rgb(255, 172, 172);
+  transition: all .1s ease-in-out;
 }
 
 ul {
@@ -56,9 +57,10 @@ li {
   display: inline-flex;
   color: white;
   font-size: 120%;
-  min-width: 100px;
+  min-width: 120px;
   justify-content: center;
   align-items: center;
+  transition: all .2s ease-in-out;
 }
 
 .menu-button {

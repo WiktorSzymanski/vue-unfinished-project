@@ -1,5 +1,5 @@
 <template>
-  <div class="offer">
+  <div class="gallery">
     <div
       v-if="imageShown"
       class="big_image"
@@ -65,9 +65,9 @@
 </script>
 
 <style scoped lang="scss">
-  .offer {
-    min-height: 1200px;
-    padding: 150px 20px 200px 20px;
+
+  .gallery {
+    padding: 150px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -96,7 +96,7 @@
     height: 100%;
     width: 100%;
     padding: 50px;
-    background: rgba(52, 58, 64, 0.98);
+    background: rgba(52, 58, 64, 0.95);
     bottom: 0;
 
     .im_area {
