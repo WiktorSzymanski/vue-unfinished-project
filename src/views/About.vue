@@ -13,21 +13,61 @@
           innych.</span>
       </div>
     </div>
-
-    <!-- <div id="panel">
-      <div id="panel-concent">
-        <h1>Dlaczego my?</h1>
-        <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Mauris aliquet consequat finibus.
-        Donec augue nunc, vehicula non diam eget, tempor interdum magna.
-        Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
-        Sed ullamcorper nibh a scelerisque dictum.
-        Vivamus posuere pharetra arcu vitae mattis.</span>
-      </div>
-      <img alt="Vue logo" src="../assets/logo.png">
-    </div> -->
   </div>
 </template>
+<script>
+
+export default {
+  name: "About",
+  data() {
+    return {
+      panels: {
+        about: {
+          pointer: '.about',
+          isVisible: false,
+          listener: null
+        },
+      }
+    };
+  },
+  mounted() {
+    var element = this.panels['about'];
+    element.isVisible = true;
+    for (const key of Object.keys(this.panels)) {
+      console.log(key);
+      this.panels[key].pointer = document.querySelector(this.panels[key].pointer);
+      this.panels[key].listener = this.triggerIsInViewport(this.panels[key]);
+      document.addEventListener("scroll",this.panels[key].listener);
+    }
+    setTimeout(() => {
+      if (element.isVisible) {
+        element.pointer.classList.add("seen");
+        document.removeEventListener("scroll", element.listener);
+      }
+    },20);
+  },
+  methods: {
+    isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+
+      return (
+        rect.top <= window.innerHeight * 2
+      );
+    },
+    triggerIsInViewport(element) {
+      return () => {
+        element.isVisible = this.isInViewport(element.pointer);
+
+        if (element.isVisible) {
+          element.pointer.classList.add("seen");
+          document.removeEventListener("scroll", element.listener);
+        }
+      };
+    },
+  },
+};
+</script>
+
 <style scoped lang="scss">
   div {
     display: flex;
@@ -37,6 +77,15 @@
     flex-direction: column;
     justify-content: space-around;
     min-height: 100vh;
+
+    transition: all 0.5s ease-out;
+    transform: translateX(50px);
+    opacity: 0;
+  }
+
+  .seen {
+    transform: translateX(0px);
+    opacity: 1;
   }
 
   .panel {

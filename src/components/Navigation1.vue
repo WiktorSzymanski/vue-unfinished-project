@@ -11,11 +11,11 @@
           O nas
         </router-link>
       </li>
-      <li>
+      <!-- <li>
         <router-link to="/offer">
           Oferta
         </router-link>
-      </li>
+      </li> -->
       <li>
         <router-link to="/gallery">
           Galeria

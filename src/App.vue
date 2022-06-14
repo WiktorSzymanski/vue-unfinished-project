@@ -6,7 +6,6 @@
           src="./assets/logo.svg"
         >
         <Navigation1 v-if="!mobileView" />
-        <!-- <div /> -->
         
         <div
           v-if="mobileView"
@@ -23,7 +22,6 @@
         v-if="banerShow "
         class="jumb"
       />
-      <!-- <Navigation2 v-if="!mobileView" /> -->
       <div class="view">
         <router-view />
       </div>
@@ -40,16 +38,13 @@
 <script>
 import SimpleJumbotron from '@/components/SimpleJumbotron.vue';
 import Navigation1 from '@/components/Navigation1.vue';
-// import Navigation2 from '@/components/Navigation2.vue';
 import NavigationMobile from '@/components/NavigationMobile.vue';
 import Footer from '@/components/Footer.vue';
-// import { bus } from './main';
 
 export default {
   components: {
     SimpleJumbotron,
     Navigation1,
-    // Navigation2,
     NavigationMobile,
     Footer,
   },
@@ -58,6 +53,8 @@ export default {
       mobileView: false,
       showNav: false,
       banerShow: true,
+      navOnBaner: true,
+      observer: null
     };
   },
   watch: {
@@ -65,64 +62,61 @@ export default {
       if (!this.mobileView) {
         this.showNav = false;
       }
+
+      const nav = document.querySelector('.navbar');
+
+      if (this.navOnBaner && !this.mobileView) {
+          nav.style.cssText = "background: rgba(52, 58, 64, 0); box-Shadow: none; height: 100px;"
+        } else {
+          nav.style.cssText = "background: rgba(52, 58, 64, 1); box-Shadow: 0 1px 10px black; height: 60px;"
+        }
     },
     $route() {
       this.checkUrl()
       setTimeout(() => {
+        if (this.banerShow) {
+          this.observer.observe(document.querySelector('.jumb'));
+        } 
         window.scrollTo(0,0)
       },20)
+
     },
+  },
+  created() {
+    this.observer = new IntersectionObserver(
+      this.onElementObserved,
+      {
+        root: null,
+        threshold: 0,
+        rootMargin: '-100px'
+      }
+    );
   },
   mounted() {
     this.handleView();
     this.checkUrl();
     window.addEventListener('resize', this.handleView);
 
-
-    //----------------------------------------------
-    if (this.mobileView) {
-      document.querySelector('.navbar').style.background = 'rgba(52, 58, 64, 1)';
-      document.querySelector('.navbar').style.boxShadow = '0 1px 10px black';
-    }
-    document.addEventListener("scroll",this.navbarOpacity());
+    if (this.banerShow) {
+      this.observer.observe(document.querySelector('.jumb'));
+    } 
   },
   methods: {
-    //-----------------------------------------------------------
-    navbarPosition() {
-      const rect = document.querySelector('.jumb').getBoundingClientRect();
-
-      return (
-        ((rect.bottom - 100)/window.innerHeight) > 0
-      );
-    },
-    navbarOpacity() {
-      return () => {
-        console.log(this.navbarPosition());
+    onElementObserved(entries) {
+      entries.forEach((entry) => {
         const nav = document.querySelector('.navbar');
-        if (this.navbarPosition() && !this.mobileView) {
-          nav.style.background = 'rgba(52, 58, 64, 0)';
-          nav.style.boxShadow = 'none';
-          nav.style.height = '100px';
+
+        this.navOnBaner = entry.isIntersecting
+
+        if (this.navOnBaner && !this.mobileView) {
+          nav.style.cssText = "background: rgba(52, 58, 64, 0); box-Shadow: none; height: 100px;"
         } else {
-          nav.style.background = 'rgba(52, 58, 64, 1)';
-          nav.style.boxShadow = '0 1px 10px black';
-          nav.style.height = '60px';
+          nav.style.cssText = "background: rgba(52, 58, 64, 1); box-Shadow: 0 1px 10px black; height: 60px;"
         }
-      }
+      })
     },
-
-
-
-
-
-
-
-
-    //-----------------------------------------------------------
-
     handleView() {
       this.mobileView = window.innerWidth <= 1000;
-      // bus.$emit('mobileView',this.mobileView);
       document.querySelector('body').classList.remove('no-scroll');
     },
     openNav() {
@@ -150,6 +144,7 @@ export default {
 <style lang="scss">
 *{
   font-size: 21px;
+  font-family: 'Poppins', sans-serif;
 }
 .router-link-active {
   outline: none;
@@ -162,8 +157,6 @@ export default {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  // background: rgba(52, 58, 64, 1);
-  // box-shadow: 0 1px 10px black;
   z-index: 1;
   transition: height 0.5s ease-in-out;
   
@@ -174,6 +167,13 @@ export default {
 
 .no-scroll {
   overflow: hidden;
+}
+@media (max-width:420px) {
+  .navbar {
+    img {
+      width: 200px;
+    }
+  }
 }
 
 @media (max-width:1000px) {

@@ -14,30 +14,16 @@
         alt="Vue logo"
         src="../assets/logo.png"
       >
-      <!-- :class="{'mobile-img' : mobileView}" -->
       <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet
         consequat finibus. Donec augue nunc, vehicula non diam eget, tempor
         interdum magna. Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
         Sed ullamcorper nibh a scelerisque dictum. Vivamus posuere pharetra arcu
         vitae mattis.</span>
     </div>
-
-    <!-- <div class="gallery panel">
-      <div class="slide-show">
-        <img alt="Vue logo" src="../assets/logo.png">
-      </div>
-      <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-      Mauris aliquet consequat finibus.
-      Donec augue nunc, vehicula non diam eget, tempor interdum magna.
-      Nam sed nulla rutrum, tincidunt augue vel, maximus odio.
-      Sed ullamcorper nibh a scelerisque dictum.
-      Vivamus posuere pharetra arcu vitae mattis.</span>
-    </div> -->
   </div>
 </template>
 
 <script>
-// import { bus } from '../main';
 
 export default {
   name: "Home",
@@ -100,7 +86,9 @@ div {
 }
 
 .panel {
-  padding: 100px 40px 100px 40px;
+  padding: 0px 40px 0px 40px;
+  height: 75vh;
+  justify-content: center;
 }
 
 .greetings {
@@ -109,7 +97,7 @@ div {
   position: relative;
 
   transition: all 0.5s ease-out;
-  transform: translateX(20px);
+  transform: translateX(50px);
   opacity: 0;
 
   h1 {
@@ -125,7 +113,7 @@ div {
   text-align: justify;
 
   transition: all 0.5s ease-out;
-  transform: translateX(-20px);
+  transform: translateX(-50px);
   opacity: 0;
 
   span {
@@ -141,22 +129,6 @@ div {
   transform: translateX(0px);
   opacity: 1;
 }
-
-// .gallery {
-//   flex-direction: column;
-
-//   span {
-//     margin-top: 50px;
-//     text-align: center;
-//   }
-// }
-
-// .slide-show {
-//   width: 100%;
-//   background: #343a40;
-//   align-items: center;
-//   justify-content: center;
-// }
 
 @media (max-width: 800px) {
   .panel {

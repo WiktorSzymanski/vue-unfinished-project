@@ -9,8 +9,7 @@
 
 <script>
 const imgUrls = [
-  'simpleJumb/image001.jpg',
-  'simpleJumb/image004.jpg',
+  'simpleJumb/LaserCutter.jpg',
 ];
 
 export default {
@@ -44,5 +43,6 @@ export default {
   background-position: center;
   transition: all 1s ease-in-out;
   object-fit: cover;
+  background-attachment: fixed;
 }
 </style>

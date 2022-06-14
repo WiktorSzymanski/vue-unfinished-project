@@ -1,66 +1,138 @@
 <template>
   <div class="contact">
-    <h1>Kontakt</h1>
+    <div class="panel">
+      <h1>Kontakt</h1>
 
-    <div class="bus-card">
-      <img
-        alt="Vue logo"
-        src="../assets/logo.png"
-      >
+      <div class="bus-card">
+        <img
+          alt="Vue logo"
+          src="../assets/logo.png"
+        >
 
-      <div class="info">
-        <div class="up">
-          <b>Sebastian Szymański</b><br>
-          tel.kom. 513 091 914
-        </div>
-        <div class="bottom">
-          <b>Pracownia Projektowa</b>
-          os. Stefana Batorego 36<br>
-          60-687 Poznań<br>
-          e-mail: akcenty@wp.pl
+        <div class="info">
+          <div class="up">
+            <b>Sebastian Szymański</b><br>
+            tel.kom. 513 091 914
+          </div>
+          <div class="bottom">
+            <b>Pracownia Projektowa</b>
+            os. Stefana Batorego 36<br>
+            60-687 Poznań<br>
+            e-mail: akcenty@wp.pl
+          </div>
         </div>
       </div>
     </div>
-
-    <div class="row">
-      <div class="info">
-        <h1>Napisz do nas</h1>
-        <span>Imie i Nazwisko</span>
-        <input type="text">
-        <span>E-mail</span>
-        <input type="text">
-        <span>Temat</span>
-        <input type="text">
-        <span>Wiadomość</span>
-        <textarea />
-        <div class="buttons">
-          <button
-            class="clear"
-            @click="clear()"
+    <div class="back-ground" :style="position"/>
+    <div 
+      id="4"
+      class="wholeForm" 
+    >
+      <h1>Napisz do nas</h1>
+      <div class="formWimg">
+        <div class="form">
+          <span>Imie i Nazwisko</span>
+          <input type="text" size="1">
+          <span>E-mail</span>
+          <input type="text">
+          <span>Temat</span>
+          <input type="text">
+        </div>
+        <div class="imgCon">
+          <img
+            alt="Vue logo"
+            src="../assets/logo.png"
           >
-            Clear
-          </button>
-          <button class="submit">
-            Submit
-          </button>
         </div>
       </div>
-      <img
-        alt="Vue logo"
-        src="../assets/logo.png"
-      >
+      <span class="wiad">Wiadomość</span>
+      <textarea />
+      <div class="buttons">
+        <button
+          class="clear"
+          @click="clear()"
+        >
+          Clear
+        </button>
+        <button class="submit">
+          Submit
+        </button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
+  name: "Contact",
+  data() {
+    return {
+      position: null,
+      panels: {
+        panel: {
+          pointer: '.panel',
+          isVisible: false,
+          listener: null
+        },
+        wholeForm: {
+          pointer: '.wholeForm',
+          isVisible: false,
+          listener: null
+        }
+      }
+    };
+  },
+  mounted() {
+    var element = this.panels['panel'];
+    element.isVisible = true;
+    for (const key of Object.keys(this.panels)) {
+      console.log(key);
+      this.panels[key].pointer = document.querySelector(this.panels[key].pointer);
+      this.panels[key].listener = this.triggerIsInViewport(this.panels[key]);
+      document.addEventListener("scroll",this.panels[key].listener);
+    }
+    setTimeout(() => {
+      if (element.isVisible) {
+        element.pointer.classList.add("seen");
+        document.removeEventListener("scroll", element.listener);
+      }
+
+      this.setBackgroundPosition();
+    },20);
+
+    setInterval(this.setBackgroundPosition, 0.5);
+  },
   methods: {
+    setBackgroundPosition () {
+      let wraper = document.getElementById('4');
+      let bound = wraper.getBoundingClientRect();
+
+      console.log(bound);
+
+      this.position = `top: ${bound.top}px; height: ${bound.height}px`
+    },
+    isInViewport(element) {
+      const rect = element.getBoundingClientRect();
+
+      return (
+        rect.top <= window.innerHeight * 0.75
+      );
+    },
+    triggerIsInViewport(element) {
+      return () => {
+        element.isVisible = this.isInViewport(element.pointer);
+
+        if (element.isVisible) {
+          element.pointer.classList.add("seen");
+          document.removeEventListener("scroll", element.listener);
+        }
+      };
+    },
     clear() {
       document.querySelectorAll("input").value = '';
       document.querySelector("textarea").value = '';
     }
-  }
+  },
 }
 </script>
 
@@ -69,18 +141,27 @@ export default {
     display: flex;
   }
 
+  .seen {
+    transform: translateX(0px) !important;
+    opacity: 1 !important;
+  }
+  
+  .panel {
+    transition: all 0.5s ease-out;
+    transform: translateX(50px);
+    opacity: 0;
+    margin-bottom: 100px;
+  }
+
   .bus-card {
     width: 100%;
-    height: 40%;
     flex-direction: row;
+    align-items: center;
     justify-content: space-around;
-    padding: 50px 20px 20px 20px;
-    margin: 100px 0 100px 0;
+    padding: 0 20px 0 20px;
 
     img {
-      width: 250px;
-      height: 20%;
-      padding-top: 20px;
+      max-height: 200px;
     }
 
     .info {
@@ -103,11 +184,33 @@ export default {
     }
   }
 
-  .row {
+  .wholeForm {
+    color: white;
     width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    padding: 100px 20px 100px 20px;
+
+    transition: all 0.5s ease-out;
+    transform: translateX(50px);
+    opacity: 0;
+
+    .formWimg {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .imgCon {
+        width: 50%;
+        justify-content: center;
+
+        img {
+          max-height: 200px;
+        }
+      }
+    }
 
     h1 {
       margin-bottom: 30px;
@@ -115,29 +218,36 @@ export default {
 
     input {
       border-top: none;
-      border-bottom-color: darkgrey;
-      background-color: rgb(235, 235, 235);
-      border-right-color: darkgrey;
+      // border-bottom-color: darkgrey;
+      background-color: white;
+      // border-right-color: darkgrey;
       border-left: none;
       margin-bottom: 10px;
-      border-radius: 10px;
+      // border-radius: 10px;
       padding: 5px 10px 5px 10px;
+      width: 100%;
     }
 
     input:focus{
       outline: none;
     }
 
+    .wiad {
+      width: 100%;
+    }
+
     textarea {
-      border-color: darkgrey;
+      // border-color: darkgrey;
       border-width: 2px;
-      background-color: rgb(235, 235, 235);
-      border-radius: 10px;
+      background-color: white;
+      // border-radius: 10px;
       border-top: none;
-      border-right-color: darkgrey;
+      // border-right-color: darkgrey;
       border-left: none;
       padding: 5px 10px 5px 10px;
       resize: none;
+      width: 100%;
+      height: 200px;
     }
 
     textarea:focus {
@@ -155,7 +265,7 @@ export default {
         border-color: darkgrey;
         border-width: 2px;
         background: rgba(52, 58, 64);
-        border-radius: 10px;
+        // border-radius: 10px;
         border-top: none;
         border-right-color: darkgrey;
         border-left: none;
@@ -175,31 +285,22 @@ export default {
     align-items: center;
     min-height: 100vh;
     padding: 200px 10px 100px 10px;
+    overflow-x: hidden;
   }
 
   .panel {
+    padding-top: 100px;
+    padding-bottom: 50px;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
-    margin-bottom: 100px;
+    width: 100%;
+    height: 70vh;
   }
-
-  .panel h1 {
-    margin-bottom: 100px;
-  }
-
-  .info {
+  
+  .form {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
-  }
-
-  #panel-content h1 {
-    align-self: flex-start;
-  }
-
-  #panel-content input{
-    width: 100%;
+    min-width: 50%;
   }
 
   h1 {
@@ -210,23 +311,43 @@ export default {
     font-family: 'Roboto', sans-serif;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 580px) {
+    .panel {
+      height: auto;
+    }
     .bus-card {
       width: 90vw;
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
       margin-top: 60px;
+      padding: 0;
 
       .info {
-        align-items: center;
         justify-content: center;
-        width: 100%;
         padding: 0;
+        .up {
+          font-size: 20px;
 
-        .bottom {
-          margin-top: 0;
+          b {
+            font-size: 20px;
+          }
         }
+        .bottom {
+          margin-top: 20px;
+          font-size: 20px;
+          b {
+            font-size: 20px;
+          }
+        }
+      }
+
+      img {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 50px;
+        max-height: unset;
       }
     }
 
@@ -238,12 +359,22 @@ export default {
       padding: 150px 20px 100px 20px;
     }
 
-    .row {
-      flex-direction: column;
-
-      img {
-        padding-top: 100px;
+    .wholeForm {
+      .imgCon {
+        display: none;
+      }
+      .form {
+        width: 100%;
+        min-width: unset;
       }
     }
+  }
+
+  .back-ground {
+    position: fixed;
+    width: 100vw;
+    background: gray;
+    top: 0;
+    left: 0;
   }
 </style>

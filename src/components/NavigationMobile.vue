@@ -17,14 +17,14 @@
           O nas
         </router-link>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <router-link
           to="/offer"
           @click.native="onClickButton()"
         >
           Oferta
         </router-link>
-      </li>
+      </li> -->
       <li class="nav-item">
         <router-link
           to="/gallery"
